@@ -28,24 +28,24 @@ CLEANFILES = \
 bin_PROGRAMS = \
         pmlgp
 
-plain_lgp_SOURCES = \
+pmlgp_SOURCES = \
         app_core.vala \
-        plain_lgp.vala \
+        pmlgp.vala \
         parse_opts.vala \
         result_summarizer.vala \
         ui_simple_gnuplot.vala \
 	gnplot2.vala
 
-plain_lgp_VALAFLAGS = \
+pmlgp_VALAFLAGS = \
         --thread \
         --pkg posix --pkg gmodule-2.0 \
         --pkg libvm --pkg liblgp --pkg libutils --pkg libgnplot --pkg gio-2.0
 
-plain_lgp_CFLAGS = \
+pmlgp_CFLAGS = \
         $(AM_CFLAGS) \
         $(DBUS_CFLAGS)
 
-plain_lgp_LDADD = \
+pmlgp_LDADD = \
         libutils.la \
         libvm.la \
         liblgp.la \
