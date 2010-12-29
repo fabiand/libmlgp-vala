@@ -2,5 +2,6 @@
  pmlgp      is a software for Symbolic Regression based on Linear Genetic Programming.
  libpmlgp   is a library containing all relevant routines.
 
+See docs/getting_started.rst for more informations.
 
 Symbolic Regresison can be used to identify systems by using statistical data.
