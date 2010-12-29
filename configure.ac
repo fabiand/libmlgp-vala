@@ -58,6 +58,7 @@ AC_CHECK_HEADERS([float.h stdlib.h string.h])
 AC_CONFIG_FILES([
 	Makefile
 	src/Makefile
+	pmlgp/Makefile
 ])
 
 AC_OUTPUT
