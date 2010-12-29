@@ -29,11 +29,11 @@ bin_PROGRAMS = \
         pmlgp
 
 pmlgp_SOURCES = \
-        app_core.vala \
-        plain_lgp.vala \
-        parse_opts.vala \
-        result_summarizer.vala \
-        ui_simple_gnuplot.vala \
+	app_core.vala \
+	plain_lgp.vala \
+	parse_opts.vala \
+	result_summarizer.vala \
+	ui_simple_gnuplot.vala \
 	gnplot2.vala
 
 pmlgp_VALAFLAGS = \
@@ -46,8 +46,8 @@ pmlgp_CFLAGS = \
         $(DBUS_CFLAGS)
 
 pmlgp_LDADD = \
-        libutils.la \
-        libvm.la \
-        liblgp.la \
+        $(top_srcdir)/src/libutils.la \
+        $(top_srcdir)/src/libvm.la \
+        $(top_srcdir)/src/libmlgp.la \
         $(BASE_LIBS) $(LIBM)
 

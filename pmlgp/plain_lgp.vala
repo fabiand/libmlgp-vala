@@ -5,8 +5,6 @@ using VirtualMachine;
 using GeneticProgramming;
 using LinearGeneticProgramming;
 
-using UI;
-
 
 
 void sighandler(int sig)
@@ -130,140 +128,6 @@ void load_or_generate_data()
 }
 
 
-void start_ui (ref unowned string[] args)
-{
-	
-	AppUI ui = new AppUI( ref args );
-	sw = ui.sw;
-
-	sw.on_run_toggled.connect( (active) => {
-		if( active )
-		{
-			runner = Thread.create<void*> (run_lgp, true);
-		}
-		else
-		{
-			if( sr != null ) sr.stop();
-		}
-	});
-
-	sw.on_exit.connect( () => {
-		sr.stop();
-	});
-
-	sw.on_load_data.connect( (filename) => {
-		debug( "Loaded file %s", filename );
-		_dataFilename = filename;
-	});
-	
-	ressum.on_best_per_complexity_summarized.connect ((candidate_informations, candidate_changed, candidates_objectives) => {
-		{
-			debug("ui upd");
-			int c = 0;
-			Individual[] vs = pre_vips; //new Individual[0];
-			unowned bool[] forced = sw.forced_entries;
-			
-			unowned bool[] forced_entries = sw.forced_entries;
-			for (int i = 0 ; i < candidate_informations.length ; i++)
-			{
-				unowned FitnessEvaluationInformation info = candidate_informations[i];
-				
-				if (info != null && info.individual != null)
-				if (forced_entries != null && forced_entries[i])
-				{
-					for (int o=0; o<info.individual.objectives.length;o++)
-					{
-						info.individual.objectives[o] = 0;
-						info.individual.set_data<bool> ("forced", true);
-					}
-				}
-				else 
-				{
-					bool? f = info.individual.get_data<bool> ("forced");
-					if (f != null && f == true) 
-					{
-						info.individual.objectives = null;
-						sr.fitnessEvaluation (info.individual);
-						info.individual.set_data<bool?> ("forced", null);
-					}
-				}
-			
-				if (forced != null && forced[i])
-				{
-					if (info.individual != null)
-					{
-						vs += info.individual.clone();
-					}
-				}
-			
-				if (!candidate_changed[i])
-				{
-					continue;
-				}
-				c++;
-				
-				sw.update_status (
-					info.individual.objectives[1].to_string(),
-					info.individual.objectives[0].to_string() + "\t %.2f".printf(info.dl),
-					info.individual.to_function().to_string(),
-					info.individual
-				);
-			}
-			sr.vips = vs;
-			
-			sgnuplot.to_be_plotted = sw.displayed_entries;
-			debug("ui upd %d xx %d %d", c, sw.displayed_entries.length, sgnuplot.to_be_plotted.length);
-		}
-	});
-	
-	sw.on_selection_changed.connect ( () => {
-		unowned Individual i = sw.currently_selected_entry as Individual;
-		if (i==null || i.objectives==null) return;
-		
-		int complx = (int) 	i.objectives[1];
-		
-		float[] dtrain = sr.trainAllEvaluation(i),
-		        dtest = sr.testAllEvaluation(i);
-		float dtt_ratio = dtrain[ObjectiveType.MSE] / dtest[ObjectiveType.MSE];
-		
-		sw.set_text (
-			"Komplexität: %d\nFehler: %.4f\nKomplexität: %.0f\n\nFormel:\n%s\n\n%s\n\nMSE Ratio: %.4f\n\nTrain summary:\n%s\nTest summary:\n%s\n"
-			.printf(
-				complx,
-				i.objectives[0],
-				i.objectives[1],
-				i.to_function(),
-				sgnuplot.get_function_for(complx),
-				dtt_ratio,
-				ObjectiveType.summarize (dtrain),
-				ObjectiveType.summarize (dtest)
-			)
-		);
-	});
-	
-	sw.on_plot_residual.connect ( () => {
-		unowned Individual i = sw.currently_selected_entry as Individual;
-		if (i==null || i.objectives==null) return;
-		
-		int complx = (int) 	i.objectives[1];
-		sgnuplot.plot_ext (complx);
-	});
-
-	sw.on_base_changed.connect ( () => {
-		// FIXME hier das sw anfragen was gerade ausgewählt ist
-		/*unowned Individual orig = sw.get_selected_base() as unowned Individual;
-
-		if (orig == null) return;
-		if (orig.to_string() == sr.get_bblock().to_string()) return;
-		
-		Individual ind = orig.clone ();
-		sr.set_bblock (ind);*/
-//		debug ("base: %s", ind.to_string());
-	});
-
-	ui.run();
-}
-
 
 LgpSettings settings;
 
@@ -322,9 +186,8 @@ void start_lgp() throws Error
 
 
 
-StatusWindow sw;
 unowned Thread<void*> runner;
-//string[] args;
+
 
 
 void* run_lgp()
@@ -351,15 +214,8 @@ int main(string[] a)
 
 	init (ref a);
 
-	if (_use_gui)
-	{
-		start_ui (ref a);
-	}
-	else
-	{
-		runner = Thread.create<void*> (run_lgp, true);
-		runner.join();
-	}
+	runner = Thread.create<void*> (run_lgp, true);
+	runner.join();
 	
 	return 0;
 }

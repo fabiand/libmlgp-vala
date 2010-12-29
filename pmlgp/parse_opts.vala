@@ -33,7 +33,7 @@ double _noiseRatio = 0.025;
 static const OptionEntry[] mainOptions = {
 	{ "file", 					'f', 0, OptionArg.FILENAME, ref _dataFilename, "Filename providing the data in CSV format.", "FILENAME" },
 	{ "session-dir",			'p', 0, OptionArg.FILENAME, ref _sessionPath, "Home of all session related files.", "PATH" },
-	{ "gui",				    'u' , 0, OptionArg.NONE, ref _use_gui, "If the GUI shall be displayed for interactive use.", null },
+/*	{ "gui",				    'u' , 0, OptionArg.NONE, ref _use_gui, "If the GUI shall be displayed for interactive use.", null },*/
 	{ null }
 };
 
