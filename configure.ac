@@ -1,0 +1,64 @@
+# configure.ac
+
+AC_INIT(libmlgp, 0.0.1)
+
+AM_INIT_AUTOMAKE([no-dist-gzip dist-bzip2 -Wall -Werror color-tests silent-rules])
+AC_CONFIG_HEADERS(config.h)
+AC_CONFIG_SRCDIR([Makefile.am])
+AC_CONFIG_MACRO_DIR([m4])
+
+AC_PROG_CC
+AM_PROG_CC_C_O
+AC_PROG_LIBTOOL
+AC_PROG_INSTALL
+AM_PROG_VALAC([0.7.8])
+AM_PROG_LIBTOOL
+
+# Checks for libraries.
+GLIB_REQUIRED=2.16.0
+GIO_REQUIRED=2.16.0
+GTHREAD_REQUIRED=2.16.0
+GMODULE_REQUIRED=2.16.0
+DBUS_REQUIRED=1.2.4
+DBUS_GLIB_REQUIRED=0.74
+GEE_REQUIRED=0.5
+
+PKG_CHECK_MODULES([BASE],[ \
+	glib-2.0 >= $GLIB_REQUIRED \
+	gio-2.0 >= $GIO_REQUIRED \
+	gthread-2.0 >= $GTHREAD_REQUIRED \
+	gmodule-2.0 >= $GMODULE_REQUIRED \
+])
+AC_SUBST(BASE_CFLAGS)
+AC_SUBST(BASE_LIBS)
+
+PKG_CHECK_MODULES([DBUS],[ \
+	dbus-1 >= $DBUS_REQUIRED \
+	dbus-glib-1 >= $DBUS_GLIB_REQUIRED \
+])
+AC_SUBST(DBUS_CFLAGS)
+AC_SUBST(DBUS_LIBS)
+
+PKG_CHECK_MODULES([GEE],[ \
+	gee-1.0 >= $GEE_REQUIRED \
+])
+AC_SUBST(GEE_CFLAGS)
+AC_SUBST(GEE_LIBS)
+
+
+# Check for libm
+AC_CHECK_LIBM
+AC_SUBST(LIBM)
+
+
+# Checks for header files.
+AC_CHECK_HEADERS([float.h stdlib.h string.h])
+
+
+AC_CONFIG_FILES([
+	Makefile
+	src/Makefile
+])
+
+AC_OUTPUT
+

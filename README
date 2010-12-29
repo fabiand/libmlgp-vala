@@ -1,5 +1,9 @@
 
-libmlgp
+plain-lgp is a software for Symbolic Regression based on Linear Genetic Programming.
 
-A library for multi-objective genetic programming.
 
+Symbolic Regresison can be used to identify systems by using statistical data.
+
+To get started have a look at the docs-folder.
+
+fabian
