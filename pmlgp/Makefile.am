@@ -30,7 +30,7 @@ bin_PROGRAMS = \
 
 pmlgp_SOURCES = \
         app_core.vala \
-        pmlgp.vala \
+        plain_lgp.vala \
         parse_opts.vala \
         result_summarizer.vala \
         ui_simple_gnuplot.vala \
@@ -38,8 +38,8 @@ pmlgp_SOURCES = \
 
 pmlgp_VALAFLAGS = \
         --thread \
-        --pkg posix --pkg gmodule-2.0 \
-        --pkg libvm --pkg liblgp --pkg libutils --pkg libgnplot --pkg gio-2.0
+        --pkg posix --pkg gmodule-2.0 --pkg gio-2.0 \
+        --pkg libvm --pkg liblgp --pkg libutils
 
 pmlgp_CFLAGS = \
         $(AM_CFLAGS) \
