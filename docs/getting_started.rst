@@ -1,13 +1,17 @@
 
 ===============
-Using pmlgp
+ Using pmlgp
 ===============
 
+:Info: http://ww.gitorious.org/pigp/ for sources.
 :Author: Fabian Deutsch <fabian.deutsch@gmx.de>
 :Date: Today
 
 .. contents::
 
+
+Some foundations
+================
 
 What this is about
 ------------------
@@ -16,6 +20,16 @@ This file is about *libmlgp*, a multi-objective symbolic regression library and 
 
 Symbolic regression tries to find formulas to describe a dataset. This special variant of symbolic regression is using a multi-objective optimization technique to determine compact solutions (well, many solutiosn differing in it's compactness/complexity).
 
+So is it like LibreOffice's solver?
+-----------------------------------
+
+It does not the same, but something similar.
+LibreOffice's solver *determins optimal values* (in cells) for a formula (in a cell) to mini- or maximize a result.
+pmlgp tries to *determins compromise formulas* for values. So a bit the other way round.
+
+
+Achieving results
+=================
 
 How to build
 ------------
@@ -92,13 +106,13 @@ By default all params have got sane defaults, that means: You can at least try t
 A more complex commandline is::
 
   # nice ../pmlgp -p ~/tmp/gp -d 100 -s 5000 -g 5000 --num-calcs 3 \
-  --operators=+,*,^,sin -m 0.9 -c 0.3 --constants=""
+    --operators=+,*,^,sin -m 0.9 -c 0.3 --constants=""
 
 If you want to know more about the used params run::
 
   # ./pmlgp --help-all
 
-.. Note:: If you are omiting the ``-f`` parameter a built-in problem is used.
+.. caution:: If you are omiting the ``-f`` parameter a built-in problem is used.
 
 
 
