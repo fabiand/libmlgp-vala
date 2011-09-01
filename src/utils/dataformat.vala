@@ -216,9 +216,10 @@ public class Rows : Object
 	{
 		File f = File.new_for_path( filename );
 		string content = "";
-		size_t size = 0;
 		try {
-			f.load_contents(null, out content, out size, null);
+    		uint8[] blob;
+			f.load_contents(null, out blob, null);
+			content = (string) blob;
 		} catch(Error e) {
 			debug(@"Reading lines from '$filename'.");
 			error(e.message);

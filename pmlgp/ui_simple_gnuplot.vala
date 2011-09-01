@@ -192,7 +192,9 @@ public class SimpleGnuplotPresentation : Object
 		try
 		{
 			File f = File.new_for_path (Path.build_filename(sesspath, @"oh.best.$(complx).func"));
-			f.load_contents (null, out cont, out l, out t);
+			uint8[] blob;
+			f.load_contents (null, out blob, out t);
+			cont = (string) blob;
 		}
 		catch(Error e)
 		{

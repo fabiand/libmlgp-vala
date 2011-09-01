@@ -43,7 +43,7 @@ libutils_la_SOURCES = \
 
 libutils_la_VALAFLAGS = \
 	--library $(vapidir)/libutils --header $(includedir)/libutils.h \
-	--pkg gio-2.0 --pkg gee-1.0 --pkg posix
+	--pkg gio-2.0 --pkg gee-0.8 --pkg posix
 
 libutils_la_CFLAGS = \
 	$(AM_CFLAGS) \
@@ -75,7 +75,7 @@ libmlgp_la_SOURCES = \
 
 libmlgp_la_VALAFLAGS = \
 	--library $(vapidir)/liblgp --header $(includedir)/liblgp.h \
-	--pkg gio-2.0 --pkg gee-1.0 \
+	--pkg gio-2.0 --pkg gee-0.8 \
 	--pkg posix --pkg libvm --pkg libutils
 
 libmlgp_la_CFLAGS = \
