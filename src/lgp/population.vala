@@ -102,8 +102,8 @@ namespace LinearGeneticProgramming
 			for( int i = 0 ; i < demes.length ; i++ )
 			{
 				demes[ i ] = new LgpSubPopulation( this.settings, this.individual_creation_settings );
-				demes[ i ].objectivesDelegate = this.objectivesDelegate;
-				demes[ i ].terminationDelegate = this.terminationDelegate;
+				demes[ i ].objectivesDelegate = (i) => { this.objectivesDelegate (i); };
+				demes[ i ].terminationDelegate = () => { return this.terminationDelegate (); };
 				demes[ i ].initialize();
 			}
 				
