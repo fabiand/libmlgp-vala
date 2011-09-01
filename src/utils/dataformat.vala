@@ -217,7 +217,7 @@ public class Rows : Object
 		File f = File.new_for_path( filename );
 		string content = "";
 		try {
-    		uint8[] blob;
+			uint8[] blob;
 			f.load_contents(null, out blob, null);
 			content = (string) blob;
 		} catch(Error e) {
