@@ -53,10 +53,10 @@ namespace VirtualMachine
 			{
 				string[] ts = /\s+/.split (s);
 				assert (ts.length == 5);
-				this.dst = ts[0].replace ("r","").to_int ();
+				this.dst = int.parse (ts[0].replace ("r",""));
 				this.operation = Operation.try_parse (ts[2].strip());
-				this.r1 = ts[3].replace ("r","").to_int ();
-				this.r2 = ts[4].replace ("r","").to_int ();
+				this.r1 = int.parse (ts[3].replace ("r",""));
+				this.r2 = int.parse (ts[4].replace ("r",""));
 			}
 		}
 

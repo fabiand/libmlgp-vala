@@ -99,7 +99,7 @@ public class Row : Object
 		
 		for( int i = 0 ; i < fs.length ; i++ )
 		{
-			this.fields[i] = (float) fs[i].to_double(); 
+			this.fields[i] = (float) double.parse(fs[i]); 
 		}
 	}
 

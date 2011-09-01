@@ -94,7 +94,7 @@ void load_or_generate_data()
 		{
 			string[] csplit = curc.split ("=");
 			const_titles[ci] = csplit[0];
-			const_values[ci] = (float) csplit[1].to_double ();
+			const_values[ci] = (float) double.parse (csplit[1]);
 			debug("Using constant '%s' with value '%.4f'.", const_titles[ci], const_values[ci]);
 		}
 		else
