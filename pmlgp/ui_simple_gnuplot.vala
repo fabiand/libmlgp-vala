@@ -67,6 +67,9 @@ public class SimpleGnuplotPresentation : Object
 		this.connected_summarizer = rs;
 		
 		this.connected_summarizer.on_best_per_complexity_summarized.connect (this.create_files_and_draw);
+		
+		this.connected_summarizer.connected_regression.train_data.to_file (Path.build_filename(sesspath, "data.train.csv"));
+    	this.connected_summarizer.connected_regression.test_data.to_file (Path.build_filename(sesspath, "data.test.csv"));
 	}
 
 	void create_files_and_draw (FitnessEvaluationInformation?[] candidates, bool[] candidate_changed, Table candidates_objectives)

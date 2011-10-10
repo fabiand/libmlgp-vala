@@ -187,6 +187,7 @@ void start_lgp() throws Error
 	print("Traindata:\n" + sr.train_data.to_string());
 	print("Testdata:\n" + sr.test_data.to_string());
 	
+	
 	// Outputs them via gnuplot
 	sgnuplot = new SimpleGnuplotPresentation(_sessionPath);
 	sgnuplot.connect_to ( ressum );
